@@ -39,7 +39,7 @@ app.post('/download', (req, res) => {
             res.status(500).json({ error: error.message });
             return;
         }
-        res.json({ fileUrl: `/output/${title}.mp4` });
+        res.json({ fileUrl: `output/${title}.mp4` });
     });
 });
 
