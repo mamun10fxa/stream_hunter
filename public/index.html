@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Hunter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stream Hunter</h1>
+        <form id="streamForm">
+            <label for="videoUrl">Video URL:</label>
+            <input type="text" id="videoUrl" name="videoUrl" required>
+
+            <label for="audioUrl">Audio URL:</label>
+            <input type="text" id="audioUrl" name="audioUrl" required>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="quality">Select Quality:</label>
+            <select id="quality" name="quality">
+                <option value="1">Video: 400 kbps, Audio: 64 kbps</option>
+                <option value="2">Video: 500 kbps, Audio: 128 kbps</option>
+                <option value="3">Video: 1024 kbps, Audio: 128 kbps</option>
+                <option value="4">Video: 1536 kbps, Audio: 128 kbps</option>
+                <option value="5">Video: 2048 kbps, Audio: 128 kbps</option>
+                <option value="6">Video: 3072 kbps, Audio: 1024 kbps</option>
+                <option value="7">Video: 4000 kbps, Audio: 256 kbps</option>
+                <option value="8">Video: 5000 kbps, Audio: 256 kbps</option>
+                <option value="9">Custom Quality</option>
+            </select>
+
+            <button type="submit" id="mergeButton">Merge</button>
+        </form>
+
+        <div id="progress" style="display: none;">
+            <div class="bar"></div>
+            <div class="text">Please wait until your video is merged...</div>
+        </div>
+
+        <div id="output" style="display: none;">
+            <a id="downloadLink" href="#" download>Click here to download your video</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+              </html>
+  
