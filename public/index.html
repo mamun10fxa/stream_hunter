@@ -32,20 +32,30 @@
                 <option value="9">Custom Quality</option>
             </select>
 
-            <button type="submit" id="mergeButton">Merge</button>
-        </form>
+            <div id="customQuality" class="hidden">
+                <label for="videoBitrate">Video Bitrate (kbps):</label>
+                <input type="text" id="videoBitrate" name="videoBitrate">
 
-        <div id="progress" style="display: none;">
-            <div class="bar"></div>
-            <div class="text">Please wait until your video is merged...</div>
+                <label for="audioBitrate">Audio Bitrate (kbps):</label>
+                <input type="text" id="audioBitrate" name="audioBitrate">
+            </div>
+
+            <button type="submit">Merge</button>
+                </form>
+
+        <div id="progress" class="hidden">
+            <p>Processing your files...</p>
+            <div class="progress-bar">
+                <div id="progress-bar-fill"></div>
+            </div>
         </div>
 
-        <div id="output" style="display: none;">
-            <a id="downloadLink" href="#" download>Click here to download your video</a>
+        <div id="downloadPrompt" class="hidden">
+            <a id="downloadLink" href="#" download="output.mp4">Click here to download your video</a>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-              </html>
-  
+</html>
+

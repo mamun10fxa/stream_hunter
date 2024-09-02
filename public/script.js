@@ -1,6 +1,10 @@
 document.getElementById('quality').addEventListener('change', function() {
     const customQuality = document.getElementById('customQuality');
-    customQuality.style.display = this.value == 9 ? 'block' : 'none';
+    if (this.value == 9) {
+        customQuality.style.display = 'block';
+    } else {
+        customQuality.style.display = 'none';
+    }
 });
 
 document.getElementById('streamForm').addEventListener('submit', function(event) {
@@ -26,12 +30,12 @@ document.getElementById('streamForm').addEventListener('submit', function(event)
             { video: '4000k', audio: '256k' },
             { video: '5000k', audio: '256k' }
         ];
-        videoBitrate = qualities[quality - 1].video;
+        videoBitrate = qualities[quality - 1].video
         audioBitrate = qualities[quality - 1].audio;
     }
 
-    document.getElementById('progress').style.display = 'block';
-    document.getElementById('output').style.display = 'none';
+    document.getElementById('progress').classList.remove('hidden');
+    document.getElementById('downloadPrompt').classList.add('hidden');
 
     fetch('/download', {
         method: 'POST',
@@ -48,14 +52,21 @@ document.getElementById('streamForm').addEventListener('submit', function(event)
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById('progress').style.display = 'none';
+        document.getElementById('progress').classList.add('hidden');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        progressBarFill.style.width = '100%';
+
         const downloadLink = document.getElementById('downloadLink');
         downloadLink.href = data.fileUrl;
-        downloadLink.style.display = 'block';
+        downloadLink.textContent = 'Click here to download your video';
+
+        // Trigger the download prompt by simulating a click event
+        downloadLink.click();
+        
+        document.getElementById('downloadPrompt').classList.remove('hidden');
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('progress').style.display = 'none';
+        document.getElementById('progress').classList.add('hidden');
     });
 });
-             
