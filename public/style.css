@@ -54,10 +54,6 @@ button:hover {
     color: #555;
 }
 
-#customQuality input {
-    width: 80%;
-}
-
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
     border-left: 4px solid #007BFF;
