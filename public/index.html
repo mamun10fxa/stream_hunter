@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stream Hunter</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Video Merging App</title>
+    <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Stream Hunter</h1>
+        <h1>Video Merging App</h1>
         <form id="streamForm">
             <label for="videoUrl">Video URL:</label>
             <input type="text" id="videoUrl" name="videoUrl" required>
@@ -19,43 +19,31 @@
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
 
-            <label for="quality">Select Quality:</label>
-            <select id="quality" name="quality">
-                <option value="1">Video: 400 kbps, Audio: 64 kbps</option>
-                <option value="2">Video: 500 kbps, Audio: 128 kbps</option>
-                <option value="3">Video: 1024 kbps, Audio: 128 kbps</option>
-                <option value="4">Video: 1536 kbps, Audio: 128 kbps</option>
-                <option value="5">Video: 2048 kbps, Audio: 128 kbps</option>
-                <option value="6">Video: 3072 kbps, Audio: 1024 kbps</option>
-                <option value="7">Video: 4000 kbps, Audio: 256 kbps</option>
-                <option value="8">Video: 5000 kbps, Audio: 256 kbps</option>
-                <option value="9">Custom Quality</option>
+            <label for="quality">Video Quality:</label>
+            <select id="quality" name="quality" required>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
+                <option value="4">Very High</option>
+                <option value="5">Ultra</option>
+                <option value="6">Ultra High</option>
+                <option value="7">Extreme</option>
+                <option value="8">Super Extreme</option>
+                <option value="9">Custom</option>
             </select>
 
-            <div id="customQuality" class="hidden">
-                <label for="videoBitrate">Video Bitrate (kbps):</label>
-                <input type="text" id="videoBitrate" name="videoBitrate">
+            <div id="customQuality" style="display: none;">
+                <label for="videoBitrate">Custom Video Bitrate (k):</label>
+                <input type="number" id="videoBitrate" name="videoBitrate" min="100" step="50">
 
-                <label for="audioBitrate">Audio Bitrate (kbps):</label>
-                <input type="text" id="audioBitrate" name="audioBitrate">
+                <label for="audioBitrate">Custom Audio Bitrate (k):</label>
+                <input type="number" id="audioBitrate" name="audioBitrate" min="64" step="16">
             </div>
 
-            <button type="submit">Merge</button>
-                </form>
-
-        <div id="progress" class="hidden">
-            <p>Processing your files...</p>
-            <div class="progress-bar">
-                <div id="progress-bar-fill"></div>
-            </div>
-        </div>
-
-        <div id="downloadPrompt" class="hidden">
-            <a id="downloadLink" href="#" download="output.mp4">Click here to download your video</a>
-        </div>
+            <button type="submit" id="mergeButton">Merge</button>
+        </form>
+        <div id="output"></div>
     </div>
-
-    <script src="script.js"></script>
+    <script src="/public/script.js"></script>
 </body>
 </html>
-
