@@ -30,12 +30,12 @@ document.getElementById('streamForm').addEventListener('submit', function(event)
             { video: '4000k', audio: '256k' },
             { video: '5000k', audio: '256k' }
         ];
-        videoBitrate = qualities[quality - 1].video
+        videoBitrate = qualities[quality - 1].video;
         audioBitrate = qualities[quality - 1].audio;
     }
 
-    document.getElementById('progress').classList.remove('hidden');
-    document.getElementById('downloadPrompt').classList.add('hidden');
+    // Show progress animation
+    document.getElementById('output').innerHTML = '<p>Please wait while your video is being merged...</p><div class="spinner"></div>';
 
     fetch('/download', {
         method: 'POST',
@@ -52,21 +52,14 @@ document.getElementById('streamForm').addEventListener('submit', function(event)
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById('progress').classList.add('hidden');
-        const progressBarFill = document.getElementById('progress-bar-fill');
-        progressBarFill.style.width = '100%';
-
-        const downloadLink = document.getElementById('downloadLink');
-        downloadLink.href = data.fileUrl;
-        downloadLink.textContent = 'Click here to download your video';
-
-        // Trigger the download prompt by simulating a click event
-        downloadLink.click();
-        
-        document.getElementById('downloadPrompt').classList.remove('hidden');
+        if (data.success) {
+            document.getElementById('output').innerHTML = `<a href="${data.downloadUrl}" class="download-button">Download your video</a>`;
+        } else {
+            document.getElementById('output').innerText = 'An error occurred. Please try again.';
+        }
     })
     .catch(error => {
+        document.getElementById('output').innerText = 'An error occurred. Please try again.';
         console.error('Error:', error);
-        document.getElementById('progress').classList.add('hidden');
     });
 });
