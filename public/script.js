@@ -1,5 +1,5 @@
 document.getElementById('streamForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the form from reloading the page
 
     const videoUrl = document.getElementById('videoUrl').value;
     const audioUrl = document.getElementById('audioUrl').value;
@@ -18,16 +18,17 @@ document.getElementById('streamForm').addEventListener('submit', function(event)
         { video: '4000k', audio: '256k' },
         { video: '5000k', audio: '256k' }
     ];
-    if (quality == 9) {
-        // Custom bitrate not supported, use predefined options instead
+
+    // Use predefined options based on quality
+    if (quality >= 1 && quality <= 8) {
         videoBitrate = qualities[quality - 1].video;
         audioBitrate = qualities[quality - 1].audio;
     } else {
-        videoBitrate = qualities[quality - 1].video;
-        audioBitrate = qualities[quality - 1].audio;
+        videoBitrate = 'default';
+        audioBitrate = 'default';
     }
 
-    // Show progress animation and message
+    // Show processing message and spinner
     document.getElementById('output').innerHTML = `
         <p>Processing your files. Please wait...</p>
         <div class="spinner"></div>
